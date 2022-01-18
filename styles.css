@@ -70,9 +70,10 @@ body,p {
 }
 
 .logs {
-    width: 100%;
-    padding: 30px 20px;
+    width: 90%;
     border-collapse: collapse;
+    padding: 30px 20px;
+    margin: 0 auto;
 }
 
 .log {
