@@ -10,7 +10,6 @@ if (isset($_POST['submit'])) {
     $time_taken = $_POST['time_taken'];
 
     $query = mysqli_query($conn, "INSERT INTO `logs` (`date`, `dist_covered`, `time_taken`) VALUES ('$date', '$dist_covered', '$time_taken') ");
-    $_POST['submit'] = 0;
 
     if ($query) {
         echo "Data Entered";
@@ -73,7 +72,7 @@ if (isset($_POST['submit'])) {
 
                 <div>
                     <label for="" class="text">ID: <br>(Required only for update/delete)</label> <br>
-                    <input name="id" class="input-field" type="number" placeholder="1" required/>
+                    <input name="id" class="input-field" type="number" placeholder="1" />
                 </div>
 
                 <button name="submit" type="submit" class="btn">Add</button>
