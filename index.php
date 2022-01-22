@@ -17,6 +17,21 @@ if (isset($_POST['submit'])) {
     } else {
         echo $conn->error;
     }
+
+} else if (isset($_POST['delete'])) {
+    // echo "<script>alert('submitted')</script>";
+    $deleteID = $_POST['id'];
+
+    $query = mysqli_query($conn, "DELETE FROM `logs` WHERE id='$deleteID' ");
+
+} else if (isset($_POST['update'])) {
+    // echo "<script>alert('submitted')</script>";
+    $date = $_POST['date'];
+    $dist_covered = $_POST['dist_covered'];
+    $time_taken = $_POST['time_taken'];
+    $updateID = $_POST['id'];
+
+    $query = mysqli_query($conn, "UPDATE `logs` SET `date` = '$date', `dist_covered` = '$dist_covered', `time_taken` = '$time_taken' WHERE `id` = '$updateID' ");
 }
 
 ?>
@@ -43,20 +58,30 @@ if (isset($_POST['submit'])) {
                 
                 <div>
                     <label for="" class="text">Date:</label> <br>
-                    <input name="date" class="input-field" type="date" placeholder="YYYY-MM-DD" required/>
+                    <input name="date" class="input-field" type="date" placeholder="YYYY-MM-DD" />
                 </div>
                 
                 <div>
                     <label for="" class="text">Distance Covered:</label> <br>
-                    <input name="dist_covered" class="input-field" type="text" placeholder="0.0km" required/>
+                    <input name="dist_covered" class="input-field" type="text" placeholder="0.0km" />
                 </div>
                 
                 <div>
                     <label for="" class="text">Time Taken:</label> <br>
-                    <input name="time_taken" class="input-field" type="text" placeholder="HH:MM:SS" required/>
+                    <input name="time_taken" class="input-field" type="text" placeholder="HH:MM:SS" />
+                </div>
+
+                <div>
+                    <label for="" class="text">ID: <br>(Required only for update/delete)</label> <br>
+                    <input name="id" class="input-field" type="number" placeholder="1" required/>
                 </div>
 
                 <button name="submit" type="submit" class="btn">Add</button>
+                <div style="display:flex; flex-direction:column; align-items:center;">
+                    <button name="delete" type="submit" class="btn" style="margin-bottom: 2px;">Delete</button>
+                    <button name="update" type="submit" class="btn">Update</button>
+                </div>
+                
             </form>
         </div>
 
@@ -89,14 +114,12 @@ if (isset($_POST['submit'])) {
 
         <table class="logs">
             <tr>
-                <td class="head" colspan="5" style="text-align: center;">Logs:</td>
+                <td class="head" colspan="3" style="text-align: center;">Logs:</td>
             </tr>
             <tr class="titles">
                 <th class="text">Date:</th>
                 <th class="text">Distance Covered:</th>
                 <th class="text">Time Taken:</th>
-                <td></td>
-                <td></td>
             </tr>
             <?php 
                 
@@ -107,7 +130,7 @@ if (isset($_POST['submit'])) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
                     // $row is an array
-                    echo "<tr class='log'><td class='text'>" . $row["date"]. "</td><td class='text'>" . $row["dist_covered"]. "</td><td class='text'>" . $row["time_taken"]. "</td><td><img src='assets/icons8-edit.svg' alt=''></td><td><img src='assets/icons8-delete.svg' alt=''></td></tr>";
+                    echo "<tr class='log'><td class='text'>" . $row["date"]. "</td><td class='text'>" . $row["dist_covered"]. "</td><td class='text'>" . $row["time_taken"]. "</td></tr>";
                 }
                 } else {
                 echo "0 results";
