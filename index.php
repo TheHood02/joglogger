@@ -8,8 +8,9 @@ if (isset($_POST['submit'])) {
     $date = $_POST['date'];
     $dist_covered = $_POST['dist_covered'];
     $time_taken = $_POST['time_taken'];
+    $id = uniqid(rand(1,10));
 
-    $query = mysqli_query($conn, "INSERT INTO `logs` (`date`, `dist_covered`, `time_taken`) VALUES ('$date', '$dist_covered', '$time_taken') ");
+    $query = mysqli_query($conn, "INSERT INTO `logs` (`date`, `dist_covered`, `time_taken`, `id`) VALUES ('$date', '$dist_covered', '$time_taken', '$id') ");
 
     if ($query) {
         echo "Data Entered";
@@ -99,15 +100,15 @@ if (isset($_POST['submit'])) {
                 <td class="text">10/01/2022</td>
                 <td class="text">2.3km</td>
                 <td class="text">14 minutes</td>
-                <td><img src="assets/icons8-edit.svg" alt=""></td>
-                <td><img src="assets/icons8-delete.svg" alt=""></td>
+                <td><img src="assets/edit-icon.svg" alt=""></td>
+                <td><img src="assets/delete-icon.svg" alt=""></td>
             </tr>
             <tr class="log">
                 <td class="text">08/01/2022</td>
                 <td class="text">4.4km</td>
                 <td class="text">30 minutes</td>
-                <td><img src="assets/icons8-edit.svg" alt=""></td>
-                <td><img src="assets/icons8-delete.svg" alt=""></td>
+                <td><img src="assets/edit-icon.svg" alt=""></td>
+                <td><img src="assets/delete-icon.svg" alt=""></td>
             </tr>
         </table> -->
 
@@ -119,17 +120,25 @@ if (isset($_POST['submit'])) {
                 <th class="text">Date:</th>
                 <th class="text">Distance Covered:</th>
                 <th class="text">Time Taken:</th>
+                <th class="text">Edit Log</th>
+                <th class="text">Delete Log</th>
             </tr>
             <?php 
                 
-                $sql = "SELECT date, dist_covered, time_taken FROM logs";
+                $sql = "SELECT id, date, dist_covered, time_taken FROM logs";
                 $result = $conn->query($sql);
                 // $result is an object
                 if ($result->num_rows > 0) {
                 // output data of each row
                 while($row = $result->fetch_assoc()) {
                     // $row is an array
-                    echo "<tr class='log'><td class='text'>" . $row["date"]. "</td><td class='text'>" . $row["dist_covered"]. "</td><td class='text'>" . $row["time_taken"]. "</td></tr>";
+                    echo "<tr class='log'>";
+                    echo "<td class='text'>". $row["date"]. "</td>";
+                    echo "<td class='text'>". $row["dist_covered"]. "</td>";
+                    echo "<td class='text'>". $row["time_taken"]. "</td>";
+                    echo "<td><img src='assets/edit-icon.svg' alt='edit button' id='$row[id]' /> </td>"; 
+                    echo "<td><img src='assets/delete-icon.svg' alt='delete button' id='$row[id]' /> </td>"; 
+                    echo "</tr>";
                 }
                 } else {
                 echo "0 results";

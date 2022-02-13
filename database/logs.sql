@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2022 at 06:57 PM
+-- Generation Time: Feb 13, 2022 at 04:17 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -35,6 +35,13 @@ CREATE TABLE `logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`id`, `date`, `dist_covered`, `time_taken`) VALUES
+(1, '2022-02-13', '>5.5km', '00:47:52');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -43,16 +50,6 @@ CREATE TABLE `logs` (
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `logs`
---
-ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
